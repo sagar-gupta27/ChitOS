@@ -1,0 +1,207 @@
+Responsibilites of BIOS ; We need to implement these things 
+========================
+A fully-functional BIOS (Basic Input/Output System) is responsible for a wide range of tasks to initialize the hardware and prepare the system for the operating system to take over. The BIOS is a critical piece of the system that directly interfaces with the hardware. Here’s a comprehensive list of the essential functions that a BIOS typically performs:
+
+1. Power-On Self-Test (POST)
+POST is the first step BIOS performs when the system is powered on or reset.
+
+It checks the basic hardware components (memory, CPU, storage devices, etc.) to ensure they are functioning correctly before loading the bootloader.
+
+POST reports any errors related to missing or malfunctioning hardware (e.g., memory issues or no keyboard).
+
+Error Reporting: POST often provides beep codes or displays messages to indicate hardware failures (e.g., "No RAM" or "Keyboard Error").
+
+2. Initialization of Hardware Components
+CPU: BIOS sets up the CPU, ensuring the proper configuration and mode (real mode or protected mode).
+
+Memory (RAM): BIOS checks and initializes system memory, usually by running memory tests or setting up memory controllers.
+
+Video (VGA/Graphics): BIOS sets the video mode (e.g., 80x25 text mode or higher resolutions) and ensures video output is ready.
+
+Keyboard: Initializes the keyboard controller and allows user input during startup.
+
+Hard Drive (or Floppy/CD-ROM): Initializes the disk controller and prepares to read data from the boot device (floppy, hard disk, CD).
+
+Mouse/USB devices: In more modern BIOS/UEFI systems, it may initialize USB devices, including mouse and keyboard.
+
+Power Management: BIOS manages basic power settings, including ACPI (Advanced Configuration and Power Interface) setup.
+
+3. Boot Device Selection
+The BIOS identifies and selects the boot device from a predefined list (floppy, hard drive, CD, USB, network, etc.).
+
+It reads the Master Boot Record (MBR) or GUID Partition Table (GPT) from the boot device and loads the bootloader into memory (usually the first 512 bytes).
+
+The BIOS can be configured to attempt booting from multiple devices in a specific order (e.g., floppy, then hard disk).
+
+4. Interrupt Vector Table Setup
+The BIOS sets up the interrupt vector table (IVT), which contains addresses for handling interrupts.
+
+Common interrupts include:
+
+int 0x10: Video services (text display, graphics modes, etc.)
+
+int 0x13: Disk services (read, write sectors)
+
+int 0x16: Keyboard services (keypress detection)
+
+int 0x17: Printer services
+
+int 0x1A: Real-time clock (RTC) services
+
+int 0x19: Boot services (load bootloader)
+
+5. Bootloader Loading
+As the BIOS is responsible for loading the bootloader into memory, it reads the first sector from the boot device (512 bytes, often the MBR) into memory (usually at 0x7C00).
+
+BIOS then transfers control to the bootloader, which takes over the responsibility of loading the operating system kernel.
+
+6. System Configuration Settings
+BIOS stores and provides access to configuration settings, often referred to as the CMOS settings.
+
+These settings control aspects like:
+
+Boot order
+
+Time and date (via the RTC)
+
+CPU and memory settings
+
+Advanced settings (overclocking, virtualisation, etc.)
+
+Power management (ACPI settings)
+
+IDE/SATA controller settings
+
+These settings are stored in a small non-volatile memory chip called CMOS RAM and are accessed through the BIOS setup utility.
+
+7. Timekeeping
+The BIOS initializes and configures the Real-Time Clock (RTC).
+
+The RTC is responsible for keeping track of the system time and date even when the system is powered off, using a small battery (usually a coin cell).
+
+The BIOS updates and provides access to the current time and date.
+
+8. Memory Mapping
+The BIOS is responsible for mapping system memory, ensuring that the available RAM is properly recognized and utilized by the system.
+
+It also sets up the memory address space for the video memory, system memory, and memory-mapped IO devices.
+
+9. Keyboard and Input Handling
+BIOS processes keypresses through interrupts (e.g., int 0x16) and can provide basic keyboard input handling for early-stage system booting.
+
+It allows for basic keyboard input even before the operating system is loaded.
+
+10. Device Initialization and Configuration
+BIOS initializes and configures hardware devices connected to the system, including:
+
+Hard drives (IDE, SATA controllers)
+
+Floppy drives (if applicable)
+
+CD/DVD drives
+
+Network cards (for PXE booting)
+
+USB devices (in newer BIOS/UEFI systems)
+
+Audio devices (optional in modern systems)
+
+This can include enabling the devices, configuring communication protocols, and setting up the controllers.
+
+11. Power Management (ACPI)
+BIOS supports ACPI (Advanced Configuration and Power Interface) to manage power states (e.g., suspend, hibernate, shutdown).
+
+It provides power management functions to conserve energy when the system is idle, and it enables sleep modes or power-off sequences when the system is shut down.
+
+12. Device Driver Loading
+Basic device drivers can be embedded in the BIOS for things like video cards, hard disk controllers, and keyboards.
+
+However, most advanced device drivers are loaded by the operating system, not the BIOS.
+
+13. Firmware Interfaces (UEFI, Legacy BIOS)
+In modern systems, BIOS functionality has transitioned to UEFI (Unified Extensible Firmware Interface), which offers more flexibility, faster booting, and better hardware support.
+
+BIOS in the traditional sense works with 16-bit real mode, while UEFI works in 32/64-bit modes and provides a more user-friendly interface, networking support, and higher-level services.
+
+14. Boot from Network (PXE Boot)
+PXE (Preboot Execution Environment) allows the system to boot from a network server instead of local storage.
+
+The BIOS sends network requests (via DHCP) to retrieve a bootloader and operating system from a network server.
+
+15. External Device Detection and Initialization
+BIOS checks for additional peripherals or devices, such as:
+
+USB devices (USB booting, keyboard, mouse)
+
+Serial and parallel ports
+
+Other legacy devices (if supported)
+
+16. Error Handling and Recovery
+If BIOS detects hardware failures (during POST or otherwise), it may:
+
+Provide error messages or beep codes.
+
+Enter a recovery mode for the user to troubleshoot hardware problems.
+
+17. Boot Options and Boot Menu
+The BIOS can provide a boot menu (usually accessed by pressing a key like F12 during startup) that lets the user choose between boot devices (e.g., floppy, USB, CD/DVD, hard drive).
+
+The user can use this menu to change the boot device order temporarily.
+
+In Summary, the Core Functions of BIOS Are:
+Power-On Self-Test (POST)
+
+Hardware Initialization (memory, video, keyboard, disk controllers)
+
+Boot Device Detection and Selection
+
+Interrupt Vector Table Setup
+
+Bootloader Loading and Execution
+
+System Configuration (CMOS)
+
+Real-Time Clock (RTC) Management
+
+Memory Mapping and Addressing
+
+Keyboard and Input Handling
+
+Device Driver Loading
+
+Power Management (ACPI)
+
+Firmware Interface (UEFI or Legacy BIOS)
+
+Network Booting (PXE)
+
+External Device Detection
+
+Error Reporting and Recovery
+
+Boot Menu for Device Selection
+
+POST (Power-On Self Test)
+Checks CPU, RAM, keyboard, display, etc.
+
+Initialize hardware 
+Sets up video mode, timers, keyboard controller, etc.
+
+Setup interrupt vector table
+Like setting the phone numbers for calling various hardware routines (e.g., int 0x10 for screen).
+
+Load Bootloader (from disk)
+It looks for a bootable device, loads the first 512 bytes (MBR) into memory at 0x7C00, and jumps to it
+
+//Address of ROM chip on motherboard = 0xFFFF0 --> 16 bytes below 1MB
+This address will have a jump instruction to the address of bios code
+
+*SO we need to put our bois at this address.
+
+lodsb --> load string byte 
+It is an x86 assembly instruction that:
+
+Loads a single byte from the memory address pointed to by SI (or RSI on x86-64) into the AL register.
+
+Then increments or decrements SI depending on the Direction Flag (DF) if DF = 0 then si+1 else si-1
