@@ -205,3 +205,21 @@ It is an x86 assembly instruction that:
 Loads a single byte from the memory address pointed to by SI (or RSI on x86-64) into the AL register.
 
 Then increments or decrements SI depending on the Direction Flag (DF) if DF = 0 then si+1 else si-1
+
+
+Setting Up IVT (Interrupt Vector Table)
+======================================
+
+1) There are total 256 interrupts , each of which takes 4 bytes
+2) This 4 byte includes --> 2 byte for IP , and 2 byte for CS IP:CS --> location/address of interrupt handler for that paritcular interrupt
+
+
+
+These 256 interrupts are divided into 4 categories
+
+
+Range	            Purpose	                        Who Uses It?
+0x00–0x1F (0–31)	Processor Exceptions / Faults	CPU Reserved — Hardware
+0x20–0x2F (32–47)	Hardware IRQs (PIC interrupts)	Devices via PIC (8259)
+0x30–0x7F (48–127)	BIOS & DOS Services	            BIOS / DOS (Software)
+0x80–0xFF (128–255)	User-defined/OS/BIOS Extensions	Reserved for user or OS
