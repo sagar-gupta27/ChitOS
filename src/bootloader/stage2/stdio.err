@@ -1,0 +1,5 @@
+stdint.h(15): Warning! W138: No newline at end of file
+x86.h(6): Warning! W138: No newline at end of file
+stdio.h(5): Warning! W138: No newline at end of file
+stdio.c(106): Warning! W202: Symbol 'zero_or_space' has been defined, but not referenced
+stdio.c(105): Warning! W202: Symbol 'numSpaces' has been defined, but not referenced
